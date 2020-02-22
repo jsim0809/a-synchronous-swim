@@ -10,7 +10,7 @@
       type: 'GET',
       url: serverUrl,
       success: (data) => {
-        console.log(data);
+        SwimTeam.move(data);
       }
     })
   }
@@ -54,5 +54,6 @@
 
     ajaxFileUplaod(file);
   });
+  setInterval(swimCommandFetcher, 1000);
 
 })();
