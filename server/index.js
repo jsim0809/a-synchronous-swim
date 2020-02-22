@@ -1,8 +1,14 @@
 
+var currentDirection = '';
 
+module.exports.getCurrentDirection = () => {
+  var temp = currentDirection;
+  currentDirection = '';
+  return temp;
+}
 
 const keypressHandler = require('./js/keypressHandler');
-keypressHandler.initialize(message => console.log(`Message received: ${message}`));
+keypressHandler.initialize(message => currentDirection = message);
 
 const httpHandler = require('./js/httpHandler');
 

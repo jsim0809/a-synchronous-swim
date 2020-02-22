@@ -22,7 +22,6 @@ describe('server responses', () => {
   });
 
   it('should respond to a GET request for a swim command', (done) => {
-    // write your test here
     let {req, res} = server.mock('/', 'GET');
 
     httpHandler.router(req, res, () => {

@@ -54,6 +54,6 @@
 
     ajaxFileUplaod(file);
   });
-  setInterval(swimCommandFetcher, 1000);
+  setInterval(swimCommandFetcher, 100);
 
 })();
