@@ -23,15 +23,11 @@
       url: serverUrl,
       data: 'yo bi please',
       success: (data) => {
-        console.log('came through');
-        console.log(data);
-
         $('.pool').css('background-image', `url(data:image/jpg;base64,${data})`);
         // $('.pool').css('background', `blue`);
       },
       error: (error) => {
         console.log(error);
-        console.log('didnt come thru');
       }
     });
   }
@@ -53,7 +49,8 @@
       processData: false,
       success: () => {
         // reload the page
-        window.location = window.location.href;
+        console.log('sent successfully');
+        backgroundImageFetcher();
       }
     });
   };

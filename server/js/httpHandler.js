@@ -13,14 +13,14 @@ module.exports.initialize = (queue) => {
   messageQueue = queue;
 };
 
-module.exports.router = (req, res, next = ()=>{}) => {
+module.exports.router = (req, res, next = () => { }) => {
   //console.log('Serving request type ' + req.method + ' for url ' + req.url);
 
   if (req.method === 'GET') {
     if (req.url === '/?yo%20bi%20please') {
       // send the image
       console.log(module.exports.backgroundImageFile);
-      fs.readFile(module.exports.backgroundImageFile,'base64', function(error, content) {
+      fs.readFile(module.exports.backgroundImageFile, 'base64', function (error, content) {
         if (error) {
           res.writeHead(404, headers);
           console.log(error);
@@ -45,14 +45,18 @@ module.exports.router = (req, res, next = ()=>{}) => {
     });
 
     req.on('end', () => {
-      console.log(data);
+      // console.log('BOUNDARY HERE: ',multipart.getBoundary(Buffer.concat(data)));
+      // console.log('PARSE HERE: ',multipart.parse(Buffer.concat(data)));
       //data = data.toString('base64');
-      // var extractedFile = multipart.getFile(data).data;
 
-      fs.writeFile(module.exports.backgroundImageFile, extractedFile, (err) => {
-           if (err) throw err;
-           console.log('The file has been saved!');
+      var extractedFile = multipart.getFile(Buffer.concat(data));
+
+      fs.writeFile(module.exports.backgroundImageFile, extractedFile.data, (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
       });
+      res.writeHead(200, headers);
+      res.end('ok');
     });
   }
   next(); // invoke next() at the end of a request to help with testing!
