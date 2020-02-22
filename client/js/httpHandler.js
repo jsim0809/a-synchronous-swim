@@ -24,9 +24,11 @@
       data: 'yo bi please',
       success: (data) => {
         console.log('came through');
+        console.log(data);
         $('.pool').css('background-image', data);
       },
-      error: () => {
+      error: (error) => {
+        console.log(error);
         console.log('didnt come thru');
       }
     });
@@ -71,6 +73,7 @@
 
     ajaxFileUplaod(file);
   });
+
   backgroundImageFetcher();
   setInterval(swimCommandFetcher, 100);
 

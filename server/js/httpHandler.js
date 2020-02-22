@@ -19,6 +19,7 @@ module.exports.router = (req, res, next = ()=>{}) => {
   if (req.method === 'GET') {
     if (req.url === '/?yo%20bi%20please') {
       // send the image
+      console.log(module.exports.backgroundImageFile);
       fs.readFile(module.exports.backgroundImageFile, function(error, content) {
         if (error) {
           res.writeHead(404, headers);
@@ -35,8 +36,8 @@ module.exports.router = (req, res, next = ()=>{}) => {
       //var options = ['up', 'down', 'left', 'right'];
       //var randomOption = options[Math.floor(Math.random() * 4)];
       res.write(direction.getCurrentDirection());
+      res.end();
     }
   }
-  res.end();
   next(); // invoke next() at the end of a request to help with testing!
 };
