@@ -20,7 +20,7 @@ module.exports.router = (req, res, next = ()=>{}) => {
     if (req.url === '/?yo%20bi%20please') {
       // send the image
       console.log(module.exports.backgroundImageFile);
-      fs.readFile(module.exports.backgroundImageFile, function(error, content) {
+      fs.readFile(module.exports.backgroundImageFile,'base64', function(error, content) {
         if (error) {
           res.writeHead(404, headers);
           console.log(error);
@@ -38,6 +38,22 @@ module.exports.router = (req, res, next = ()=>{}) => {
       res.write(direction.getCurrentDirection());
       res.end();
     }
+  } else if (req.method === 'POST') {
+    var data = [];
+    req.on('data', (chunk) => {
+      data.push(chunk);
+    });
+
+    req.on('end', () => {
+      console.log(data);
+      //data = data.toString('base64');
+      // var extractedFile = multipart.getFile(data).data;
+
+      fs.writeFile(module.exports.backgroundImageFile, extractedFile, (err) => {
+           if (err) throw err;
+           console.log('The file has been saved!');
+      });
+    });
   }
   next(); // invoke next() at the end of a request to help with testing!
 };

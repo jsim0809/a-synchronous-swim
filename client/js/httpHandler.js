@@ -25,7 +25,9 @@
       success: (data) => {
         console.log('came through');
         console.log(data);
-        $('.pool').css('background-image', data);
+
+        $('.pool').css('background-image', `url(data:image/jpg;base64,${data})`);
+        // $('.pool').css('background', `blue`);
       },
       error: (error) => {
         console.log(error);
@@ -45,7 +47,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
