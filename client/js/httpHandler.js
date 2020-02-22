@@ -1,3 +1,4 @@
+
 (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
@@ -9,10 +10,26 @@
     $.ajax({
       type: 'GET',
       url: serverUrl,
+      data: 'refresh',
       success: (data) => {
         SwimTeam.move(data);
       }
-    })
+    });
+  }
+
+  var backgroundImageFetcher = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      data: 'yo bi please',
+      success: (data) => {
+        console.log('came through');
+        $('.pool').css('background-image', data);
+      },
+      error: () => {
+        console.log('didnt come thru');
+      }
+    });
   }
 
   /////////////////////////////////////////////////////////////////////
@@ -54,6 +71,8 @@
 
     ajaxFileUplaod(file);
   });
+  backgroundImageFetcher();
   setInterval(swimCommandFetcher, 100);
+
 
 })();
