@@ -5,6 +5,15 @@
   //
   // TODO: build the swim command fetcher here
   //
+  var swimCommandFetcher = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      success: (data) => {
+        console.log(data);
+      }
+    })
+  }
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!

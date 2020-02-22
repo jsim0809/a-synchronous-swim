@@ -24,10 +24,6 @@ describe('server responses', () => {
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
     let {req, res} = server.mock('/', 'GET');
-    res.write('up');
-    for (var key in res) {
-      console.log(key + ':' + res[key]);
-    }
 
     httpHandler.router(req, res, () => {
       expect(res._responseCode).to.equal(200);
